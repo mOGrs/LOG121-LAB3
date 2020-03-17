@@ -4,6 +4,9 @@ import java.awt.Point;
 
 import modele.Perspective;
 
+/**
+ * Commande permettant de déplacer une image en appliquant une translation sur une Perspective.
+ */
 public class TranslationCommande implements Command{
 	private Point translation;
 	private Perspective perspective;

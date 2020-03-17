@@ -2,6 +2,9 @@ package commandes;
 
 import modele.Perspective;
 
+/**
+ * Commande permettant de changer le focus d'une image
+ */
 public class ZoomCommande implements Command{
 	private final static double MULTI_AGRANDISSEMENT = 1.1;
 	private final static double MULTI_RAPETISSEMENT = 0.9;

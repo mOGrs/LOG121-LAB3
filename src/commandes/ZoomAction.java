@@ -9,6 +9,10 @@ import java.awt.event.MouseWheelListener;
 
 import modele.Perspective;
 
+/**
+ * Permet de créer des instances de ZoomCommande (qui vont ensuite changer le zoom sur les images) à 
+ * partir du roulement de la roue d'une sourie. 
+ */
 public class ZoomAction extends PerspectiveAbstractAction implements MouseWheelListener{
 	
 	public ZoomAction(Perspective perspective) {

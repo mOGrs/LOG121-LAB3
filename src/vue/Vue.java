@@ -17,6 +17,9 @@ import modele.Image;
 import modele.Modele;
 import modele.Perspective;
 
+/**
+ * Classe mère représentant toutes les vues du programme. 
+ */
 public abstract class Vue extends JFrame implements Observer{
 	protected Image image;
 	protected Perspective perspective;
@@ -34,6 +37,10 @@ public abstract class Vue extends JFrame implements Observer{
 		setPerspective(perspective);
 	}
 	
+	/**
+	 * Change perspective de la vue
+	 * @param perspective: La perspective associée à la vue
+	 */
 	public void setPerspective(Perspective perspective) {
 		if(perspective != this.perspective) {
 			this.perspective = perspective;
@@ -42,6 +49,10 @@ public abstract class Vue extends JFrame implements Observer{
 		}
 	}
 	
+	/**
+	 * Change l'Image de la vue
+	 * @param perspective: La perspective associée à la vue
+	 */
 	public void setImage(Image image) {
 		this.image = image;
 		this.image.addObserver(this);
@@ -58,7 +69,11 @@ public abstract class Vue extends JFrame implements Observer{
 	public Perspective getPerspective() {
 		return perspective;
 	}
-
+	
+	/**
+	 * L'objet image ne contient qu'une référence vers une image. Ce sont les vues 
+	 * qui s'occupenet d'aller chercher ces images et de les préserver en mémoire. 
+	 */
 	public void mettreImageEnMemoire() {
 		try {
 			imageEnMemoire = ImageIO.read(new File(image.getImagePath()));
@@ -70,14 +85,15 @@ public abstract class Vue extends JFrame implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		if(o instanceof Image) {
-			if(((Image)o) != this.image) {
+			if(((Image)o) != this.image) { //On change toute l'instance d'Image
 				setImage((Image)o);
-			} else if(image.getImagePath() != null) {
+			} else if(image.getImagePath() != null) { //L'instance d'Image a un nouveau fichier d'image
 				mettreImageEnMemoire();
 			}
 		} else if(o instanceof Perspective && ((Perspective)o) != this.perspective) {
 			setPerspective((Perspective)o);
 		}
+		//On repaint dès qu'il y a un changement dans le modèle. 
 		repaint();
 	}
 	

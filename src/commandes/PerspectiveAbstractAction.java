@@ -4,7 +4,10 @@ import java.awt.event.ActionEvent;
 
 import modele.Perspective;
 
-public abstract class PerspectiveAbstractAction extends GeneralAbstraction{
+/**
+ * Classe mère facilitant l'implémentation d'action devant agir sur une Perspective. 
+ */
+public abstract class PerspectiveAbstractAction extends GeneralActionAbstraction{
 	private Perspective perspective;
 
 	public PerspectiveAbstractAction(Perspective perspective) {

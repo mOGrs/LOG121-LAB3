@@ -11,9 +11,18 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import modele.Image;
 import vue.Vue;
 
-public class ChargerImageAction extends GeneralAbstraction {
-	private static final String LAST_USED_FOLDER = "";
-	ArrayList<Vue> vues = new ArrayList<Vue>();
+/**
+ * Cette classe permet de changer l'image de certaines Vues. 
+ */
+public class ChargerImageAction extends GeneralActionAbstraction {
+	private static final String LAST_USED_FOLDER = ""; //Permet de garder en mémoire l'emplacement 
+	//de la dernière image sélectionnée
+	ArrayList<Vue> vues = new ArrayList<Vue>(); //Les vues dont on veut modifier l'image
+	
+	public ChargerImageAction(Vue vue) {
+		this.vues = new ArrayList<Vue>();
+		this.vues.add(vue);
+	}
 	
 	public ChargerImageAction(ArrayList<Vue> vues) {
 		super();
@@ -25,16 +34,16 @@ public class ChargerImageAction extends GeneralAbstraction {
 		//Permet de se rappeler le chemin du dernier folder utilisé
 		Preferences prefs = Preferences.userRoot().node(getClass().getName());
 		JFileChooser fileChooser = new JFileChooser(prefs.get(LAST_USED_FOLDER,new File(".").getAbsolutePath()));
-		//JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-		fileChooser.setDialogTitle("Sï¿½lectionnez un fichier de configuration");
+		fileChooser.setDialogTitle("Selectionnez un fichier de configuration");
 		fileChooser.setAcceptAllFileFilterUsed(false);
-		// Crï¿½er un filtre
+		
+		// Creer un filtre
 		FileNameExtensionFilter filtre = new FileNameExtensionFilter(".png", "png", ".jpg", "jpg");
 		fileChooser.addChoosableFileFilter(filtre);
 
 		int returnValue = fileChooser.showOpenDialog(null);
 
-		if (returnValue == JFileChooser.APPROVE_OPTION) {
+		if (returnValue == JFileChooser.APPROVE_OPTION) { //Si le fichier est valable
 			prefs.put(LAST_USED_FOLDER, fileChooser.getSelectedFile().getParent());
 			String imagePath = fileChooser.getSelectedFile().getAbsolutePath();
 			System.out.println(imagePath);

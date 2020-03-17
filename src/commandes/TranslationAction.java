@@ -8,6 +8,10 @@ import java.awt.event.MouseMotionListener;
 
 import modele.Perspective;
 
+/**
+ * Permet de créer des instances de TranslationCommande (qui vont ensuite faire bouger les images) à 
+ * partir du drag d'une sourie.
+ */
 public class TranslationAction extends PerspectiveAbstractAction implements MouseListener, MouseMotionListener{
 	private int xDepart = 0;
 	private int yDepart = 0;

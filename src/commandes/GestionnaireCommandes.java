@@ -20,6 +20,12 @@ package commandes;
 
 import java.util.ArrayList;
 
+/**
+ * Gestionnaire de commandes impl.menter en suivant un Patron Singleton et qui devrait en principe 
+ * être le seul à exécuter les commandes. 
+ */
+
+//SE RÉFÉRER AUX EXEMPLES DONNÉES PAR LE PROF POUR COMPRENDRE LA LOGIQUE
 public class GestionnaireCommandes {
 	private static GestionnaireCommandes SINGLETON = null;//Utilisation OBLIGATOIRE du SINGLETON
 	private ArrayList<Command> historique = new ArrayList<Command>();

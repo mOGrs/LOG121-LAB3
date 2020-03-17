@@ -19,16 +19,12 @@
 package vue;
 import modele.Image;
 import modele.Modele;
-import modele.Perspective;
-
 import javax.swing.*;
-
-import java.awt.FlowLayout;
 import java.awt.Graphics;
-import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
 
+/**
+ * Hérite de vue et ne fait que représeneter une petite image
+ */
 public class ImageReduite extends  Vue {
 	public final static int WIDTH = 120;
 	public final static int HEIGHT = WIDTH;
