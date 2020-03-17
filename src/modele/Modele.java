@@ -11,19 +11,15 @@ public class Modele {
 		this.perspectives = new ArrayList<Perspective>();
 	}
 
-	public ArrayList<Image> getImages() {
-		return images;
+	public void addImage(Image image) {
+		if(!images.contains(image)) {
+			this.images.add(image);
+		}
 	}
 
-	public void setImages(ArrayList<Image> images) {
-		this.images = images;
-	}
-
-	public ArrayList<Perspective> getPerspectives() {
-		return perspectives;
-	}
-
-	public void setPerspectives(ArrayList<Perspective> perspectivess) {
-		this.perspectives = perspectivess;
+	public void addPerspective(Perspective perspective) {
+		if(!perspectives.contains(perspective)) {
+			this.perspectives.add(perspective);
+		}
 	}
 }

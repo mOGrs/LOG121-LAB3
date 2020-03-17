@@ -3,12 +3,12 @@
  Session: H2020
  Groupe:  02
  Projet: Laboratoire #3
- Étudiant(e)s: Marc-Olivier Gagner
+ Ã‰tudiant(e)s: Marc-Olivier Gagner
 
 
  Professeur :  Vincent Lacasse
  Nom du fichier: ImageReduite.java
- Date créé: 2019-03-10
+ Date crÃ©Ã©: 2019-03-10
  Date dern. modif. 2019-03-10
  *******************************************************
  Historique des modifications
@@ -18,6 +18,7 @@
 
 package vue;
 import modele.Image;
+import modele.Modele;
 import modele.Perspective;
 
 import javax.swing.*;
@@ -29,30 +30,28 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class ImageReduite extends  Vue {
-	private final int WIDTH = 50;
-	private final int HEIGHT = 50;
-	private final int barBuffer = 60;
-	private final int leftBuffer = 10;
-	
-	public ImageReduite(Image image, Perspective perspective) {
-		super(image, perspective);
-		initWindow();
-	}
+	public final static int WIDTH = 120;
+	public final static int HEIGHT = WIDTH;
+	public final static int BORDURE_BARRE = 40;
+	public final static int TAILLE_IMAGE = HEIGHT - BORDURE_BARRE;
 
-	public ImageReduite(Image image) {
-		super(image);
+	public ImageReduite(Modele modele, Image image) {
+		super(modele, image);
 		initWindow();
 	}
 	
-	private void initWindow() {
-		this.setSize(WIDTH, HEIGHT + barBuffer);
-		//setUndecorated(true);
+	protected void initWindow() {
+		this.setSize(WIDTH, HEIGHT);
+		add(new PanneauPrincipal());
 	}
 	
-	@Override
-	public void paint(Graphics g) {
-		if(imageEnMemoire != null) {
-			g.drawImage(imageEnMemoire, leftBuffer, barBuffer, WIDTH, HEIGHT, null);
+	public class PanneauPrincipal extends JPanel {
+		@Override
+		public void paint(Graphics g) {
+			if(imageEnMemoire != null) {
+				super.paint(g);
+				g.drawImage(imageEnMemoire, 0, 0, TAILLE_IMAGE, TAILLE_IMAGE, null);
+			}
 		}
 	}
 }
