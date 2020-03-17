@@ -18,9 +18,25 @@
 
 package commandes;
 
-public class GestionnaireCommandes implements Command {
-    @Override
-    public void execute() {
-        throw new UnsupportedOperationException();
-    }
+import java.util.ArrayList;
+
+public class GestionnaireCommandes {
+	private static GestionnaireCommandes SINGLETON = null;//Utilisation OBLIGATOIRE du SINGLETON
+	private ArrayList<Command> historique = new ArrayList<Command>();
+	private ArrayList<Command> ListRefaire = new ArrayList<Command>();
+	
+	private GestionnaireCommandes() {}
+	
+	public synchronized static GestionnaireCommandes getGestionnaireCommande() {
+		if(SINGLETON == null) {
+			SINGLETON = new GestionnaireCommandes();
+		}
+		return SINGLETON;
+	}
+	
+	public void faireCommande(Command cmd) {
+		if(cmd.faire()) {
+			historique.add(cmd);
+		}
+	}
 }

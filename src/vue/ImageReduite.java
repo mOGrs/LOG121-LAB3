@@ -17,23 +17,42 @@
  *******************************************************/
 
 package vue;
-
-import controleur.ImageControleur;
-import controleur.PerspectiveControleur;
+import modele.Image;
+import modele.Perspective;
 
 import javax.swing.*;
+
+import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-public class ImageReduite extends JFrame implements Observer {
+public class ImageReduite extends  Vue {
+	private final int WIDTH = 50;
+	private final int HEIGHT = 50;
+	private final int barBuffer = 60;
+	private final int leftBuffer = 10;
+	
+	public ImageReduite(Image image, Perspective perspective) {
+		super(image, perspective);
+		initWindow();
+	}
 
-    public ImageReduite(ImageControleur imageControleur, PerspectiveControleur perspectiveControleur){
-        throw new UnsupportedOperationException();
-    }
-
-
-    @Override
-    public void update(Observable o, Object arg) {
-        throw new UnsupportedOperationException();
-    }
+	public ImageReduite(Image image) {
+		super(image);
+		initWindow();
+	}
+	
+	private void initWindow() {
+		this.setSize(WIDTH, HEIGHT + barBuffer);
+		//setUndecorated(true);
+	}
+	
+	@Override
+	public void paint(Graphics g) {
+		if(imageEnMemoire != null) {
+			g.drawImage(imageEnMemoire, leftBuffer, barBuffer, WIDTH, HEIGHT, null);
+		}
+	}
 }

@@ -25,6 +25,15 @@ import java.util.Observable;
 
 public class Perspective extends Observable {
     private Point emplacement;
+    
+    public Perspective() {
+        this(new Point(0,0));
+    }
+    
+    public Perspective(Point emplacement) {
+        this.emplacement = emplacement;
+    }
+    
 
     public Point getEmplacement() {
         return emplacement;
@@ -33,10 +42,6 @@ public class Perspective extends Observable {
     public void setEmplacement(Point emplacement) {
         this.emplacement = emplacement;
         triggerObservers();
-    }
-
-    public Perspective(Point emplacement) {
-        this.emplacement = emplacement;
     }
 
     public void triggerObservers(){

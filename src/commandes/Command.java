@@ -19,5 +19,7 @@
 package commandes;
 
 public interface Command {
-    void execute();
+    public boolean faire();
+    public void defaire();
+    public void refaire();
 }

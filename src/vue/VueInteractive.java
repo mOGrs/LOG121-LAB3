@@ -7,7 +7,7 @@
 
 
  Professeur :  Vincent Lacasse
- Nom du fichier: VueDeux.java
+ Nom du fichier: VueMiniature.java
  Date créé: 2019-03-10
  Date dern. modif. 2019-03-10
  *******************************************************
@@ -18,21 +18,28 @@
 
 package vue;
 
-import controleur.ImageControleur;
-import controleur.PerspectiveControleur;
+import modele.Image;
+import modele.Perspective;
 
 import javax.swing.*;
+
+import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-public class VueDeux extends JFrame implements Observer {
+public class VueInteractive extends Vue {
 
-    public VueDeux(ImageControleur imageControleur, PerspectiveControleur perspectiveControleur){
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-        throw new UnsupportedOperationException();
-    }
+	public VueInteractive(Image image) {
+		super(image);
+		// TODO Auto-generated constructor stub
+	}
+	
+	@Override
+	public void paint(Graphics g) {
+		if(imageEnMemoire != null) {
+			super.paint(g);
+			g.drawImage(imageEnMemoire, perspectives.get(0).getEmplacement().x, perspectives.get(0).getEmplacement().y, null);
+		}
+	}
 }
