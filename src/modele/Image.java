@@ -18,10 +18,15 @@
 
 package modele;
 
+import java.awt.image.BufferedImage;
 import java.util.Observable;
 
 public class Image extends Observable {
     private String imagePath;
+    
+    public Image(String imagePath) {
+        this.imagePath = imagePath;
+    }
 
     public String getImagePath() {
         return imagePath;
@@ -30,10 +35,6 @@ public class Image extends Observable {
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
         triggerObservers();
-    }
-
-    public Image(String imagePath) {
-        this.imagePath = imagePath;
     }
 
     public void triggerObservers(){

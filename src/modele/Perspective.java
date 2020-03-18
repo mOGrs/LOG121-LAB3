@@ -21,25 +21,56 @@ package modele;
 import java.awt.*;
 import java.util.Observable;
 
-//TODO Gestion de la rotation
-
 public class Perspective extends Observable {
+	private static double ZOOM_DEFAUT = 1;
     private Point emplacement;
-
-    public Point getEmplacement() {
-        return emplacement;
+    private double facteurZoom;
+    
+    public Perspective() {
+        this(new Point(0,0), ZOOM_DEFAUT);
+    }
+    
+    public Perspective(double facteurZoom) {
+    	this(new Point(0,0), facteurZoom);
+    	
+    }
+    
+    public Perspective(Point emplacement) {
+    	this(emplacement, ZOOM_DEFAUT);
+    }
+    
+    public Perspective(Point emplacement, double facteurZoom) {
+    	this.emplacement = emplacement;
+    	this.facteurZoom = facteurZoom;
     }
 
     public void setEmplacement(Point emplacement) {
         this.emplacement = emplacement;
         triggerObservers();
     }
+    
+    public Point getEmplacement() {
+		return emplacement;
+	}
 
-    public Perspective(Point emplacement) {
-        this.emplacement = emplacement;
+	public int getX() {
+    	return emplacement.x;
+    }
+    
+    public int getY() {
+    	return emplacement.y;
     }
 
-    public void triggerObservers(){
+    public double getFacteurZoom() {
+		return facteurZoom;
+	}
+
+	public void setFacteurZoom(double facteurZoom) {
+		this.facteurZoom = facteurZoom;
+		triggerObservers();
+	}
+
+	public void triggerObservers(){
         setChanged();
         notifyObservers();
     }
