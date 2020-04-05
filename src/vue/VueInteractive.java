@@ -22,16 +22,21 @@ import modele.Image;
 import modele.Modele;
 import modele.Perspective;
 import javax.swing.*;
+
+import commandes.ChargerImageAction;
+import commandes.SerialiserPerspectiveAction;
 import commandes.TranslationAction;
 import commandes.ZoomAction;
 
 import java.awt.BorderLayout;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
 
 /**
  * Classe représentatnt les vues interratives que l'on peut manipuler. 
  */
 public class VueInteractive extends Vue {
+	private static final String ITEM_SERIALISER= "Sérialiser la perspective";
 	public final static int WIDTH = 500;
 	public final static int HEIGHT = WIDTH;
 	
@@ -51,9 +56,13 @@ public class VueInteractive extends Vue {
 		
 		//Ajout d'un menu
 		JMenuBar menuFenetre = new JMenuBar();
-		menuFenetre.add(FenetrePrincipale.creerMenuFichier(this));
-		add(menuFenetre, BorderLayout.NORTH);
+		JMenu menuFichier = FenetrePrincipale.creerMenuFichier(this);
 		
+		//Ajout de l'option de sérialisation de la perspective. 
+		menuFichier.add(this.creerOptionMenuSerialisation());
+		
+		menuFenetre.add(menuFichier);
+		add(menuFenetre, BorderLayout.NORTH);
 		
 		PanneauPrincipal pp = new PanneauPrincipal();
 		TranslationAction translationlst = new TranslationAction(perspective);
@@ -63,6 +72,12 @@ public class VueInteractive extends Vue {
 		pp.addMouseMotionListener(translationlst);
 		pp.addMouseWheelListener(zoomlst);
 		add(pp);
+	}
+	
+	public JMenuItem creerOptionMenuSerialisation() {
+		JMenuItem itemSerialiser = new JMenuItem(ITEM_SERIALISER);
+		itemSerialiser.addActionListener(new SerialiserPerspectiveAction(this));
+		return itemSerialiser;
 	}
 	
 	/**

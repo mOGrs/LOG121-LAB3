@@ -21,7 +21,7 @@ package modele;
 import java.awt.*;
 import java.util.Observable;
 
-public class Perspective extends Observable {
+public class Perspective extends Observable implements java.io.Serializable{
 	private static double ZOOM_DEFAUT = 1;
     private Point emplacement;
     private double facteurZoom;

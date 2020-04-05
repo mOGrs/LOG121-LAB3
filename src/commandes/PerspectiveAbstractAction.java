@@ -7,7 +7,7 @@ import modele.Perspective;
 /**
  * Classe mère facilitant l'implémentation d'action devant agir sur une Perspective. 
  */
-public abstract class PerspectiveAbstractAction extends GeneralActionAbstraction{
+public abstract class PerspectiveAbstractAction extends GeneralAction{
 	private Perspective perspective;
 
 	public PerspectiveAbstractAction(Perspective perspective) {

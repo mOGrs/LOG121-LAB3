@@ -10,7 +10,7 @@ import java.awt.event.KeyListener;
  * elle est associée. 
  */
 
-public class DefaireAction extends GeneralActionAbstraction{
+public class DefaireAction extends GeneralAction{
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {

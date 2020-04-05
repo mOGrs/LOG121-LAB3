@@ -30,7 +30,7 @@ public class FenetrePrincipale extends MappedActionsJFrame {
 	private static final Dimension DIMENSION = new Dimension(300, 55);
 	private static final String MENU_FICHIER_TITRE = "Fichier";
 	private static final String MENU_FICHIER_CHARGER_IMAGE = "Charger image";
-	private static final String MENU_FICHIER_QUITTER = "Quitter";
+	private static final String MENU_FICHIER_QUITTER = "#Quitter";
 	private static final String MENU_NOUVELLE_FENETRE= "Nouvelle fenetre";
 	private static final ArrayList<Vue> vues = new ArrayList<Vue>();
 	private Modele modele;
@@ -108,8 +108,9 @@ public class FenetrePrincipale extends MappedActionsJFrame {
 		menuQuitter.addActionListener((ActionEvent e) -> {
 			System.exit(0);
 		});
+				
 		menuFichier.add(menuCharger);
-		menuFichier.add(menuQuitter);
+		//menuFichier.add(menuQuitter);
 		return menuFichier;
 	}
 	
