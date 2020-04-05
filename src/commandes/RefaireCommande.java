@@ -2,7 +2,7 @@ package commandes;
 
 import modele.Memento;
 
-public class DefaireCommande implements Command{
+public class RefaireCommande implements Command{
 
 	@Override
 	public boolean faire() {

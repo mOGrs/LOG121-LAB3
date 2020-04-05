@@ -27,9 +27,9 @@ import java.util.LinkedList;
 
 //SE RÉFÉRER AUX EXEMPLES DONNÉES PAR LE PROF POUR COMPRENDRE LA LOGIQUE
 public class GestionnaireCommandes {
-	private static GestionnaireCommandes SINGLETON = null;//Utilisation OBLIGATOIRE du SINGLETON
+	private static GestionnaireCommandes SINGLETON = null;
 	private LinkedList<Command> historique = new LinkedList<Command>();
-	private LinkedList<Command> ListRefaire = new LinkedList<Command>();
+	private LinkedList<Command> listeRefaire = new LinkedList<Command>();
 	
 	private GestionnaireCommandes() {}
 	
@@ -43,18 +43,31 @@ public class GestionnaireCommandes {
 	public void faireCommande(Command cmd) {
 		if (cmd instanceof DefaireCommande) {
             defaire();
-        }
-		if(cmd.faire()) {
+        } else if(cmd instanceof RefaireCommande) {
+        	refaire();
+        }else if(cmd.faire()) {
 			historique.add(cmd);
-		}
+			//Dès que l'on fait faire, on brise la liste des commandes à refaire,
+			//on doit donc vider la liste à refaire 
+			if(listeRefaire.size() > 0) {
+				listeRefaire.clear();
+			}
+        }
 	}
 	
     private void defaire() {
         if (historique.size() > 0) {
-        	//On enlève la première commande de la liste. 
         	Command cmd = historique.removeLast();
         	cmd.defaire();
-            //aRefaire.addFirst(commandeADefaire);
-        } 
+            listeRefaire.add(cmd);
+        }
+    }
+    
+    private void refaire() {
+        if (listeRefaire.size() > 0) {
+        	Command cmd = listeRefaire.removeLast();
+        	cmd.refaire();
+        	historique.add(cmd);
+        }
     }
 }

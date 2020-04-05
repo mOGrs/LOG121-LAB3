@@ -16,7 +16,11 @@ import vue.Vue;
  */
 public class ChargerImageAction extends PouvantEtreAppliqueAPlusieursVuesAction {
 	private static final String LAST_USED_FOLDER = ""; //Permet de garder en mémoire l'emplacement 
-	//de la dernière image sélectionnée	
+	//de la dernière image sélectionnée
+	private static final String JPG = "jpg";
+	private static final String JPEG = "jpeg";
+	private static final String PNG = "png";
+	private static final String DESCRIPTION = ".png, .jpeg ou .jpg";
 	
 	/**
 	 * PAS de constructeur avec des vues individuelles voir la class
@@ -37,7 +41,7 @@ public class ChargerImageAction extends PouvantEtreAppliqueAPlusieursVuesAction 
 		fileChooser.setAcceptAllFileFilterUsed(false);
 		
 		// Creer un filtre
-		FileNameExtensionFilter filtre = new FileNameExtensionFilter("png ou jpg", "png", ".jpg");
+		FileNameExtensionFilter filtre = new FileNameExtensionFilter(DESCRIPTION, JPG, JPEG, PNG);
 		fileChooser.addChoosableFileFilter(filtre);
 
 		int returnValue = fileChooser.showOpenDialog(null);

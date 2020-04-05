@@ -1,6 +1,8 @@
 package commandes;
 
+import modele.Memento;
 import modele.Perspective;
+import modele.PerspectiveMemento;
 
 /**
  * Commande permettant de changer le focus d'une image
@@ -9,6 +11,7 @@ public class ZoomCommande implements Command{
 	private final static double MULTI_AGRANDISSEMENT = 1.1;
 	private final static double MULTI_RAPETISSEMENT = 0.9;
 	
+	private PerspectiveMemento nouvellePerspective;
 	private Perspective perspective;
 	private double toursSouris;
 	private double multiplicateur = 1; //Facteur d'agrandissement/rapetissement par
@@ -29,6 +32,7 @@ public class ZoomCommande implements Command{
 		}
 		double facteur = perspective.getFacteurZoom();
 		this.perspective.setFacteurZoom(facteur * multiplicateur);
+		nouvellePerspective = (PerspectiveMemento) perspective.saveStateToMemento();
 		return true;
 	}
 
@@ -40,8 +44,6 @@ public class ZoomCommande implements Command{
 
 	@Override
 	public void refaire() {
-		// TODO Auto-generated method stub
-		
+		this.perspective.getStateFromMemento(nouvellePerspective);
 	}
-
 }

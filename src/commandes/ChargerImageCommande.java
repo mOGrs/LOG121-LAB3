@@ -1,13 +1,15 @@
 package commandes;
 
 import modele.Image;
+import modele.ImageMemento;
+import modele.Memento;
 
 /**
  * Commande permettant de changer le fichier d'image associé à une instance d'Image
  */
 public class ChargerImageCommande implements Command{
-	private String newImagePath;
-	private String oldImagePath; //Si on fait éventuellement le undo/redo
+	private ImageMemento nouvelleImage;
+	private ImageMemento ancienneImage; //Si on fait éventuellement le undo/redo
 	private Image image;
 	
 	/**
@@ -16,26 +18,25 @@ public class ChargerImageCommande implements Command{
 	 */
 	public ChargerImageCommande(Image image, String imagePath) {
 		super();
-		this.newImagePath = imagePath;
+		this.nouvelleImage = new ImageMemento(imagePath);
 		this.image = image;
 	}
 
 	@Override
 	public boolean faire() {
-		this.image.setImagePath(this.newImagePath);
-		return false;
+		System.out.println("changer");
+		ancienneImage = (ImageMemento) image.saveStateToMemento();
+		this.image.getStateFromMemento(nouvelleImage);
+		return true;
 	}
 
 	@Override
 	public void defaire() {
-		// TODO Auto-generated method stub
-		
+		this.image.getStateFromMemento(ancienneImage);
 	}
 
 	@Override
 	public void refaire() {
-		// TODO Auto-generated method stub
-		
+		this.image.getStateFromMemento(nouvelleImage);
 	}
-
 }

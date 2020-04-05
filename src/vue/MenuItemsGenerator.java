@@ -13,7 +13,7 @@ import commandes.DeserialisationPerspectiveAction;
  * Cette classe rassemble les éléments des menus des classes FenetrePrincipale
  * et VueInteractive qui leur sont communs.
  */
-public class MenuFactory {
+public class MenuItemsGenerator {
 	private static final String MENU_FICHIER_QUITTER = "Quitter";
 	private static final String MENU_FICHIER_TITRE = "Fichier";
 	private static final String CHARGER_PERSPECTIVE= "Charger une perspective";

@@ -21,7 +21,7 @@ package modele;
 import java.awt.*;
 import java.util.Observable;
 
-public class Perspective extends Observable implements java.io.Serializable{
+public class Perspective extends Observable implements java.io.Serializable, Originator{
 	private static double ZOOM_DEFAUT = 1;
     private Point emplacement;
     private double facteurZoom;
@@ -47,7 +47,7 @@ public class Perspective extends Observable implements java.io.Serializable{
     	this.emplacement = emplacement;
     	this.facteurZoom = facteurZoom;
     }
-    
+   
     public void copierPerspective(Perspective aCopier) {
     	this.setEmplacement(aCopier.emplacement);
     	this.setFacteurZoom(aCopier.facteurZoom);
@@ -83,4 +83,15 @@ public class Perspective extends Observable implements java.io.Serializable{
         setChanged();
         notifyObservers();
     }
+
+	@Override
+	public Memento saveStateToMemento() {
+		return new PerspectiveMemento(emplacement, facteurZoom);
+	}
+
+	@Override
+	public void getStateFromMemento(Memento memento) {
+    	this.setEmplacement(((PerspectiveMemento)memento).getEmplacement());
+    	this.setFacteurZoom(((PerspectiveMemento)memento).getFacteurZoom());
+	}
 }

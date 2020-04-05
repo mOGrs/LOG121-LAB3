@@ -14,6 +14,8 @@ import vue.Vue;
 public class DeserialisationPerspectiveAction extends PouvantEtreAppliqueAPlusieursVuesAction {
 	private static final String LAST_USED_FOLDER = ""; //Permet de garder en mémoire l'emplacement 
 	//de la dernière image sélectionnée
+	private static final String EXTENSION = "ser";
+	private static final String DESCRIPTION = ".ser";
 	
 	/**
 	 * PAS de constructeur avec des vues individuelles voir la class
@@ -34,8 +36,8 @@ public class DeserialisationPerspectiveAction extends PouvantEtreAppliqueAPlusie
 		fileChooser.setAcceptAllFileFilterUsed(false);
 		
 		// Creer un filtre
-//		FileNameExtensionFilter filtre = new FileNameExtensionFilter(EXTENSION, EXTENSION);
-//		fileChooser.addChoosableFileFilter(filtre);
+		FileNameExtensionFilter filtre = new FileNameExtensionFilter(DESCRIPTION, EXTENSION);
+		fileChooser.addChoosableFileFilter(filtre);
 
 		int returnValue = fileChooser.showOpenDialog(null);
 

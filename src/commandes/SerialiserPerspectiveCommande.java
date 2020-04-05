@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
+import modele.Memento;
 import modele.Perspective;
 
 public class SerialiserPerspectiveCommande implements Command{
@@ -31,15 +32,8 @@ public class SerialiserPerspectiveCommande implements Command{
 	}
 
 	@Override
-	public void defaire() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void defaire() {}
 
 	@Override
-	public void refaire() {
-		// TODO Auto-generated method stub
-		
-	}
-	
+	public void refaire() {}
 }

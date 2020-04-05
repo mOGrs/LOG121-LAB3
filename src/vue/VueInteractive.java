@@ -40,6 +40,11 @@ public class VueInteractive extends Vue {
 	private static final String ITEM_SERIALISER= "Sauvegarder la perspective";
 	public final static int WIDTH = 500;
 	public final static int HEIGHT = WIDTH;
+	private final static String DESCRIPTION = "Éléments à copier: ";
+	private final static String BTN_CP_ECHELLE = "Échelle";
+	private final static String BTN_CP_TRANSLATION = "Translation";
+	private final static String BTN_CP_LES_DEUX= "Les deux";
+	private final static String BTN_CP_RIEN = "Rien";
 	
 	public VueInteractive(Modele modele, Image image, Perspective perspective) {
 		super(modele, image, perspective);
@@ -71,22 +76,35 @@ public class VueInteractive extends Vue {
 	public void creerMenu() {
 		//Ajout d'un menu
 		JMenuBar menuFenetre = new JMenuBar();
-		JMenu menuFichier = MenuFactory.creerMenuFichier();
+		JMenu menuFichier = MenuItemsGenerator.creerMenuFichier();
 		
 		//Ajout des options de sérialisation
 		menuFichier.add(this.creerOptionMenuSerialisation());
 		
 		//Ajout de l'option de charger une perpective POUR CETTE VUE SEULEMENT
-		menuFichier.add(MenuFactory.creerItemMenuChargerPerpsective(this));
+		menuFichier.add(MenuItemsGenerator.creerItemMenuChargerPerpsective(this));
 		
 		//Ajout de l'option de charger une image POUR CETTE VUE SEULEMENT
-		menuFichier.add(MenuFactory.creerItemMenuChargerImage(this));
+		menuFichier.add(MenuItemsGenerator.creerItemMenuChargerImage(this));
 		
 		//Ajouter l'option de quitter au menu, séparer d'un séparateur
 		menuFichier.addSeparator();
-		menuFichier.add(MenuFactory.creerMenuItemQuitter());
+		menuFichier.add(MenuItemsGenerator.creerMenuItemQuitter());
 		
 		menuFenetre.add(menuFichier);
+		menuFenetre.add(new JLabel(DESCRIPTION));
+		
+		//Ajout des boutons pour le copier-coller
+		JButton echelle = new JButton(BTN_CP_ECHELLE);
+		JButton translation = new JButton(BTN_CP_TRANSLATION);
+		JButton lesDeux = new JButton(BTN_CP_LES_DEUX);
+		JButton rien = new JButton(BTN_CP_RIEN);
+		
+		menuFenetre.add(echelle);
+		menuFenetre.add(translation);
+		menuFenetre.add(lesDeux);
+		menuFenetre.add(rien);
+		
 		add(menuFenetre, BorderLayout.NORTH);
 	}
 	

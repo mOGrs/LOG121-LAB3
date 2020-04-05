@@ -18,14 +18,21 @@
 
 package modele;
 
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.Observable;
 
-public class Image extends Observable {
-    private String imagePath;
+public class Image extends Observable implements Originator{
+    private String imagePath = null;
+    
+    public Image(Image aCopier) {
+    	this.setImagePath(aCopier.getImagePath());
+    }
+    
+    public Image() {}
     
     public Image(String imagePath) {
-        this.imagePath = imagePath;
+    	this.setImagePath(imagePath);
     }
 
     public String getImagePath() {
@@ -33,12 +40,24 @@ public class Image extends Observable {
     }
 
     public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-        triggerObservers();
+    	if(imagePath != null) {
+            this.imagePath = imagePath;
+            triggerObservers();
+    	}
     }
 
     public void triggerObservers(){
         setChanged();
         notifyObservers();
     }
+
+	@Override
+	public Memento saveStateToMemento() {
+		return new ImageMemento(imagePath);
+	}
+
+	@Override
+	public void getStateFromMemento(Memento memento) {
+		this.setImagePath(((ImageMemento)memento).getImagePath());
+	}
 }

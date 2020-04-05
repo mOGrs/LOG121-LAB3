@@ -2,13 +2,16 @@ package commandes;
 
 import java.awt.Point;
 
+import modele.Memento;
 import modele.Perspective;
+import modele.PerspectiveMemento;
 
 /**
  * Commande permettant de déplacer une image en appliquant une translation sur une Perspective.
  */
 public class TranslationCommande implements Command{
 	private Point translation;
+	private PerspectiveMemento nouvellePerspective;
 	private Perspective perspective;
 	private boolean translationComplete;
 	
@@ -33,6 +36,8 @@ public class TranslationCommande implements Command{
 			int newX = perspective.getX() + translation.x;
 			int newY =  perspective.getY() + translation.y;
 			perspective.setEmplacement(new Point(newX, newY));
+		} else {
+			nouvellePerspective = (PerspectiveMemento) perspective.saveStateToMemento();
 		}
 		return translationComplete;
 	}
@@ -46,8 +51,6 @@ public class TranslationCommande implements Command{
 
 	@Override
 	public void refaire() {
-		// TODO Auto-generated method stub
-		
+		this.perspective.getStateFromMemento(nouvellePerspective);
 	}
-
 }

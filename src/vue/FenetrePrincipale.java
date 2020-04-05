@@ -62,20 +62,20 @@ public class FenetrePrincipale extends MappedActionsJFrame {
 		add(menuFenetre, BorderLayout.NORTH);
 		
 		//Ajout du menu contenant les options déroulantes
-		JMenu menuFichier = MenuFactory.creerMenuFichier();
+		JMenu menuFichier = MenuItemsGenerator.creerMenuFichier();
 		
 		//Ajout de l'option de charger une perpective POUR TOUTES LES VUES
-		menuFichier.add(MenuFactory.creerItemMenuChargerPerpsective(vues));
+		menuFichier.add(MenuItemsGenerator.creerItemMenuChargerPerpsective(vues));
 		
 		//Ajout de l'option de charger une image POUR TOUTES LES VUES
-		menuFichier.add(MenuFactory.creerItemMenuChargerImage(vues));
+		menuFichier.add(MenuItemsGenerator.creerItemMenuChargerImage(vues));
 		
 		//Ajout de l'option permettant d'ouvrier de nouvelles fenêtres 
 		menuFichier.add(creerMenuItemNouvelleFenetre());
 
 		//Ajout de l'option de quitter
 		menuFichier.addSeparator();
-		menuFichier.add(MenuFactory.creerMenuItemQuitter());
+		menuFichier.add(MenuItemsGenerator.creerMenuItemQuitter());
 		
 		//Ajouter le menu contenant les options déroulantes au menu de la fenêtre
 		menuFenetre.add(menuFichier);
@@ -99,19 +99,19 @@ public class FenetrePrincipale extends MappedActionsJFrame {
 	 */
 	private void initVues() {
 		//Image reduite
-		ImageReduite thum = new ImageReduite(modele, new Image(null));
+		ImageReduite thum = new ImageReduite(modele, new Image());
 		thum.setVisible(true);
 		thum.setLocation(0, DIMENSION.height);
 		vues.add(thum);
 		
 		//Vue 1
-		VueInteractive vue1 = new VueInteractive(modele, new Image(null));
+		VueInteractive vue1 = new VueInteractive(modele, new Image());
 		vue1.setVisible(true);
 		vue1.setLocation(DIMENSION.width, 0);
 		vues.add(vue1);
 		
 		//Vue 2
-		VueInteractive vue2 = new VueInteractive(modele, new Image(null));
+		VueInteractive vue2 = new VueInteractive(modele, new Image());
 		vue2.setVisible(true);
 		vue2.setLocation(DIMENSION.width + VueInteractive.WIDTH, 0);
 		vues.add(vue2);
@@ -122,7 +122,7 @@ public class FenetrePrincipale extends MappedActionsJFrame {
 	 * @return nouvelle VueInteractive
 	 */
 	private VueInteractive createVueInteractive() {
-		VueInteractive vue = new VueInteractive(modele, new Image(null));
+		VueInteractive vue = new VueInteractive(modele, new Image());
 		vue.setVisible(true);
 		//Les nouvelles vues sont placées au milieu de l'écran. 
 		vue.setLocationRelativeTo(null);

@@ -13,6 +13,10 @@ import vue.Vue;
  * Par exemple, lorsque l'on charge une image, si on le fait à partir de la fenêtre
  * principale, toutes les images sont changées. Par contre, si on le fait à partir d'une
  * vue, seule l'image de la vue est changée.
+ * 
+ * Il est important de comprendre que les commandes s'appliquent toujours sur des
+ * perspectives individuelles et qu'il faut passer par l'action
+ * pour pouvoir agir sur plusieurs vues en même temps. 
  */
 public abstract class PouvantEtreAppliqueAPlusieursVuesAction extends GeneralAction{
 	ArrayList<Vue> vues = new ArrayList<Vue>(); //Les vues dont on veut modifier l'image
