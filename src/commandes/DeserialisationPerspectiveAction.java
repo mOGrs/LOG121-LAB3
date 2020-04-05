@@ -11,11 +11,18 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import vue.Vue;
 
-public class DeserialisationPerspectiveAction extends FileChooserAction {
-	private Vue vue;
+public class DeserialisationPerspectiveAction extends PouvantEtreAppliqueAPlusieursVuesAction {
+	private static final String LAST_USED_FOLDER = ""; //Permet de garder en mémoire l'emplacement 
+	//de la dernière image sélectionnée
 	
-	public DeserialisationPerspectiveAction(Vue vue) {
-		this.vue = vue;
+	/**
+	 * PAS de constructeur avec des vues individuelles voir la class
+	 * PouvantEtreAppliqueAPlusieursVuesAction
+	 * @param vues: toutes les vues étant modifiées lorsques le change
+	 * la perspective. 
+	 */
+	public DeserialisationPerspectiveAction(ArrayList<Vue> vues) {
+		super(vues);
 	}
 
 	@Override
@@ -35,7 +42,9 @@ public class DeserialisationPerspectiveAction extends FileChooserAction {
 		if (returnValue == JFileChooser.APPROVE_OPTION) { //Si le fichier est valable
 			prefs.put(LAST_USED_FOLDER, fileChooser.getSelectedFile().getParent());
 			String imagePath = fileChooser.getSelectedFile().getAbsolutePath();
-			gc.faireCommande(new DeserialisationPerspectiveCommande(vue.getPerspective(), imagePath));
+			for(Vue vue:vues) {
+				gc.faireCommande(new DeserialisationPerspectiveCommande(vue.getPerspective(), imagePath));
+			}
 		}
 	}
 

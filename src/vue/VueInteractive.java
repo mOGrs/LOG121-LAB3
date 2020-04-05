@@ -38,7 +38,6 @@ import java.awt.event.ActionEvent;
  */
 public class VueInteractive extends Vue {
 	private static final String ITEM_SERIALISER= "Sauvegarder la perspective";
-	private static final String ITEM_DESERIALISER= "Charger une perspective";
 	public final static int WIDTH = 500;
 	public final static int HEIGHT = WIDTH;
 	
@@ -56,17 +55,6 @@ public class VueInteractive extends Vue {
 	protected void initWindow() {
 		this.setSize(WIDTH, HEIGHT);
 		
-		//Ajout d'un menu
-		JMenuBar menuFenetre = new JMenuBar();
-		JMenu menuFichier = FenetrePrincipale.creerMenuFichier(this);
-		
-		//Ajout des options de sérialisation/désérialisation de la perspective. 
-		menuFichier.add(this.creerOptionMenuSerialisation());
-		menuFichier.add(this.creerOptionMenuDeserialisation());
-		
-		menuFenetre.add(menuFichier);
-		add(menuFenetre, BorderLayout.NORTH);
-		
 		PanneauPrincipal pp = new PanneauPrincipal();
 		TranslationAction translationlst = new TranslationAction(perspective);
 		ZoomAction zoomlst = new ZoomAction(perspective);
@@ -75,18 +63,37 @@ public class VueInteractive extends Vue {
 		pp.addMouseMotionListener(translationlst);
 		pp.addMouseWheelListener(zoomlst);
 		add(pp);
+		
+		//Création du menu
+		this.creerMenu();
 	}
 	
-	public JMenuItem creerOptionMenuSerialisation() {
+	public void creerMenu() {
+		//Ajout d'un menu
+		JMenuBar menuFenetre = new JMenuBar();
+		JMenu menuFichier = MenuFactory.creerMenuFichier();
+		
+		//Ajout des options de sérialisation
+		menuFichier.add(this.creerOptionMenuSerialisation());
+		
+		//Ajout de l'option de charger une perpective POUR CETTE VUE SEULEMENT
+		menuFichier.add(MenuFactory.creerItemMenuChargerPerpsective(this));
+		
+		//Ajout de l'option de charger une image POUR CETTE VUE SEULEMENT
+		menuFichier.add(MenuFactory.creerItemMenuChargerImage(this));
+		
+		//Ajouter l'option de quitter au menu, séparer d'un séparateur
+		menuFichier.addSeparator();
+		menuFichier.add(MenuFactory.creerMenuItemQuitter());
+		
+		menuFenetre.add(menuFichier);
+		add(menuFenetre, BorderLayout.NORTH);
+	}
+	
+	private JMenuItem creerOptionMenuSerialisation() {
 		JMenuItem itemSerialiser = new JMenuItem(ITEM_SERIALISER);
 		itemSerialiser.addActionListener(new SerialiserPerspectiveAction(this));
 		return itemSerialiser;
-	}
-	
-	public JMenuItem creerOptionMenuDeserialisation() {
-		JMenuItem itemDeserialiser = new JMenuItem(ITEM_DESERIALISER);
-		itemDeserialiser.addActionListener(new DeserialisationPerspectiveAction(this));
-		return itemDeserialiser;
 	}
 	
 	/**

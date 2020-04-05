@@ -11,7 +11,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import vue.Vue;
 
-public class SerialiserPerspectiveAction extends FileChooserAction {
+public class SerialiserPerspectiveAction extends GeneralAction {
+	private static final String LAST_USED_FOLDER = ""; //Permet de garder en mémoire l'emplacement 
+	//de la dernière image sélectionnée
 	private static final String EXTENSION = ".ser";
 	private Vue vue;
 	

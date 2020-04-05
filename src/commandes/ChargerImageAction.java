@@ -14,17 +14,18 @@ import vue.Vue;
 /**
  * Cette classe permet de changer l'image de certaines Vues. 
  */
-public class ChargerImageAction extends FileChooserAction {
-	ArrayList<Vue> vues = new ArrayList<Vue>(); //Les vues dont on veut modifier l'image
+public class ChargerImageAction extends PouvantEtreAppliqueAPlusieursVuesAction {
+	private static final String LAST_USED_FOLDER = ""; //Permet de garder en mémoire l'emplacement 
+	//de la dernière image sélectionnée	
 	
-	public ChargerImageAction(Vue vue) {
-		this.vues = new ArrayList<Vue>();
-		this.vues.add(vue);
-	}
-	
+	/**
+	 * PAS de constructeur avec des vues individuelles voir la class
+	 * PouvantEtreAppliqueAPlusieursVuesAction
+	 * @param vues: toutes les vues étant modifiées lorsques le change
+	 * l'image. 
+	 */
 	public ChargerImageAction(ArrayList<Vue> vues) {
-		super();
-		this.vues = vues;
+		super(vues);
 	}
 
 	@Override

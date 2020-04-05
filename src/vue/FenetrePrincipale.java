@@ -17,6 +17,7 @@ import javax.swing.KeyStroke;
 
 import commandes.ChargerImageAction;
 import commandes.DefaireAction;
+import commandes.DeserialisationPerspectiveAction;
 import modele.Image;
 import modele.Modele;
 
@@ -28,11 +29,10 @@ public class FenetrePrincipale extends MappedActionsJFrame {
 	private static final long serialVersionUID = 1L;
 	private static final String TITRE_FENETRE = "Laboratoire 3 : LOG121";
 	private static final Dimension DIMENSION = new Dimension(300, 55);
-	private static final String MENU_FICHIER_TITRE = "Fichier";
-	private static final String MENU_FICHIER_CHARGER_IMAGE = "Charger image";
-	private static final String MENU_FICHIER_QUITTER = "#Quitter";
 	private static final String MENU_NOUVELLE_FENETRE= "Nouvelle fenetre";
 	private static final ArrayList<Vue> vues = new ArrayList<Vue>();
+	private static final String MENU_FICHIER_CHARGER_IMAGE = "Charger image";
+
 	private Modele modele;
 
 	public FenetrePrincipale() {
@@ -40,17 +40,8 @@ public class FenetrePrincipale extends MappedActionsJFrame {
 		//On initialise les vues tel que demandé
 		initVues();
 		
-		//Mise en place de la fenetre principale.
-		JMenuBar menuFenetre = new JMenuBar();
-		menuFenetre.add(creerMenuFichier(vues));
-		add(menuFenetre, BorderLayout.NORTH);
-		JMenuItem nouvelleFenetre = new JMenuItem(MENU_NOUVELLE_FENETRE);
-		//Listener permettant d'ouvrir de nouvelles fenetres
-		nouvelleFenetre.addActionListener((ActionEvent e) -> {
-			vues.add(createVueInteractive());
-		});
-		menuFenetre.add(nouvelleFenetre);
-		
+		//Mise en place du menu 
+		this.creerMenu();
 		
 		//Faire en sorte que le X de la fenetre ferme la fenetre
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -63,7 +54,48 @@ public class FenetrePrincipale extends MappedActionsJFrame {
 	}
 	
 	/**
-	 * Initialisation des vues initiales. 
+	 * Instancie le menu de la fenêter principale
+	 */
+	public void creerMenu() {
+		//Ajout du menu
+		JMenuBar menuFenetre = new JMenuBar();
+		add(menuFenetre, BorderLayout.NORTH);
+		
+		//Ajout du menu contenant les options déroulantes
+		JMenu menuFichier = MenuFactory.creerMenuFichier();
+		
+		//Ajout de l'option de charger une perpective POUR TOUTES LES VUES
+		menuFichier.add(MenuFactory.creerItemMenuChargerPerpsective(vues));
+		
+		//Ajout de l'option de charger une image POUR TOUTES LES VUES
+		menuFichier.add(MenuFactory.creerItemMenuChargerImage(vues));
+		
+		//Ajout de l'option permettant d'ouvrier de nouvelles fenêtres 
+		menuFichier.add(creerMenuItemNouvelleFenetre());
+
+		//Ajout de l'option de quitter
+		menuFichier.addSeparator();
+		menuFichier.add(MenuFactory.creerMenuItemQuitter());
+		
+		//Ajouter le menu contenant les options déroulantes au menu de la fenêtre
+		menuFenetre.add(menuFichier);
+	}
+	
+	/**
+	 * Créer un item de menu permettant de crééer une nouvelle VueInteractive
+	 * @return
+	 */
+	private JMenuItem creerMenuItemNouvelleFenetre() {
+		JMenuItem nouvelleFenetre = new JMenuItem(MENU_NOUVELLE_FENETRE);
+		//Listener permettant d'ouvrir de nouvelles fenetres
+		nouvelleFenetre.addActionListener((ActionEvent e) -> {
+			vues.add(createVueInteractive());
+		});
+		return nouvelleFenetre;
+	}
+	
+	/**
+	 * Initialisation des 3 vues initiales. 
 	 */
 	private void initVues() {
 		//Image reduite
@@ -85,37 +117,15 @@ public class FenetrePrincipale extends MappedActionsJFrame {
 		vues.add(vue2);
 	}
 	
-	public VueInteractive createVueInteractive() {
+	/**
+	 * Permet de créer des vues supplémentaires à celles créées initialement. 
+	 * @return nouvelle VueInteractive
+	 */
+	private VueInteractive createVueInteractive() {
 		VueInteractive vue = new VueInteractive(modele, new Image(null));
 		vue.setVisible(true);
 		//Les nouvelles vues sont placées au milieu de l'écran. 
 		vue.setLocationRelativeTo(null);
 		return vue;
-	}
-	
-	/**
-	 * Crée le menu Permettant d'ouvrir de nouveaux fichiers
-	 * @return
-	 */
-	public static JMenu creerMenuFichier(ArrayList<Vue> vues) {
-		JMenu menuFichier = new JMenu(MENU_FICHIER_TITRE);
-		JMenuItem menuCharger = new JMenuItem(MENU_FICHIER_CHARGER_IMAGE);
-		menuCharger.addActionListener(new ChargerImageAction(vues));		
-		menuFichier.add(menuCharger);
-		return menuFichier;
-	}
-	
-	public static JMenuItem creerMenuItemQuitter() {
-		JMenuItem menuQuitter = new JMenuItem(MENU_FICHIER_QUITTER);
-		menuQuitter.addActionListener((ActionEvent e) -> {
-			System.exit(0);
-		});
-		return menuQuitter;
-	}
-	
-	public static JMenu creerMenuFichier(Vue vue) {
-		ArrayList<Vue> vues = new ArrayList<Vue>();
-		vues.add(vue);
-		return creerMenuFichier(vues);
 	}
 }
