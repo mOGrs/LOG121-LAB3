@@ -62,8 +62,6 @@ public class FenetrePrincipale extends MappedActionsJFrame {
 		setResizable(false);
 	}
 	
-	
-	
 	/**
 	 * Initialisation des vues initiales. 
 	 */
@@ -102,16 +100,17 @@ public class FenetrePrincipale extends MappedActionsJFrame {
 	public static JMenu creerMenuFichier(ArrayList<Vue> vues) {
 		JMenu menuFichier = new JMenu(MENU_FICHIER_TITRE);
 		JMenuItem menuCharger = new JMenuItem(MENU_FICHIER_CHARGER_IMAGE);
-		menuCharger.addActionListener(new ChargerImageAction(vues));
+		menuCharger.addActionListener(new ChargerImageAction(vues));		
+		menuFichier.add(menuCharger);
+		return menuFichier;
+	}
+	
+	public static JMenuItem creerMenuItemQuitter() {
 		JMenuItem menuQuitter = new JMenuItem(MENU_FICHIER_QUITTER);
-		
 		menuQuitter.addActionListener((ActionEvent e) -> {
 			System.exit(0);
 		});
-				
-		menuFichier.add(menuCharger);
-		//menuFichier.add(menuQuitter);
-		return menuFichier;
+		return menuQuitter;
 	}
 	
 	public static JMenu creerMenuFichier(Vue vue) {

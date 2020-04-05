@@ -26,6 +26,10 @@ public class Perspective extends Observable implements java.io.Serializable{
     private Point emplacement;
     private double facteurZoom;
     
+    public Perspective(Perspective aCopier) {
+    	copierPerspective(aCopier);
+    }
+    
     public Perspective() {
         this(new Point(0,0), ZOOM_DEFAUT);
     }
@@ -42,6 +46,11 @@ public class Perspective extends Observable implements java.io.Serializable{
     public Perspective(Point emplacement, double facteurZoom) {
     	this.emplacement = emplacement;
     	this.facteurZoom = facteurZoom;
+    }
+    
+    public void copierPerspective(Perspective aCopier) {
+    	this.setEmplacement(aCopier.emplacement);
+    	this.setFacteurZoom(aCopier.facteurZoom);
     }
 
     public void setEmplacement(Point emplacement) {

@@ -22,9 +22,9 @@ public class ZoomCommande implements Command{
 
 	@Override
 	public boolean faire() {
-		if(toursSouris > 0) {
+		if(toursSouris < 0) {
 			multiplicateur = MULTI_AGRANDISSEMENT;
-		} else if(toursSouris < 0) {
+		} else if(toursSouris > 0) {
 			multiplicateur = MULTI_RAPETISSEMENT;
 		}
 		double facteur = perspective.getFacteurZoom();

@@ -2,29 +2,20 @@ package commandes;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.prefs.Preferences;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import modele.Image;
 import vue.Vue;
 
-/**
- * Cette classe permet de changer l'image de certaines Vues. 
- */
-public class ChargerImageAction extends FileChooserAction {
-	ArrayList<Vue> vues = new ArrayList<Vue>(); //Les vues dont on veut modifier l'image
+public class DeserialisationPerspectiveAction extends FileChooserAction {
+	private Vue vue;
 	
-	public ChargerImageAction(Vue vue) {
-		this.vues = new ArrayList<Vue>();
-		this.vues.add(vue);
-	}
-	
-	public ChargerImageAction(ArrayList<Vue> vues) {
-		super();
-		this.vues = vues;
+	public DeserialisationPerspectiveAction(Vue vue) {
+		this.vue = vue;
 	}
 
 	@Override
@@ -32,21 +23,20 @@ public class ChargerImageAction extends FileChooserAction {
 		//Permet de se rappeler le chemin du dernier folder utilisé
 		Preferences prefs = Preferences.userRoot().node(getClass().getName());
 		JFileChooser fileChooser = new JFileChooser(prefs.get(LAST_USED_FOLDER,new File(".").getAbsolutePath()));
-		fileChooser.setDialogTitle("Selectionnez un fichier de configuration");
+		fileChooser.setDialogTitle("Selectionnez un fichier de perspective à désérialiser");
 		fileChooser.setAcceptAllFileFilterUsed(false);
 		
 		// Creer un filtre
-		FileNameExtensionFilter filtre = new FileNameExtensionFilter("png ou jpg", "png", ".jpg");
-		fileChooser.addChoosableFileFilter(filtre);
+//		FileNameExtensionFilter filtre = new FileNameExtensionFilter(EXTENSION, EXTENSION);
+//		fileChooser.addChoosableFileFilter(filtre);
 
 		int returnValue = fileChooser.showOpenDialog(null);
 
 		if (returnValue == JFileChooser.APPROVE_OPTION) { //Si le fichier est valable
 			prefs.put(LAST_USED_FOLDER, fileChooser.getSelectedFile().getParent());
 			String imagePath = fileChooser.getSelectedFile().getAbsolutePath();
-			for(Vue vue:vues) {
-				gc.faireCommande(new ChargerImageCommande(vue.getImage(), imagePath));
-			}
+			gc.faireCommande(new DeserialisationPerspectiveCommande(vue.getPerspective(), imagePath));
 		}
 	}
+
 }
