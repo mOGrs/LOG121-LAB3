@@ -12,7 +12,9 @@ import java.util.Observer;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
+import commandes.DefaireAction;
 import modele.Image;
 import modele.Modele;
 import modele.Perspective;
@@ -20,7 +22,7 @@ import modele.Perspective;
 /**
  * Classe mère représentant toutes les vues du programme. 
  */
-public abstract class Vue extends JFrame implements Observer{
+public abstract class Vue extends MappedActionsJFrame implements Observer{
 	protected Image image;
 	protected Perspective perspective;
 	protected BufferedImage imageEnMemoire = null;

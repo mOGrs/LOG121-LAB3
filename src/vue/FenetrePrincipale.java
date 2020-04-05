@@ -7,19 +7,23 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
+import javax.swing.InputMap;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.KeyStroke;
 
 import commandes.ChargerImageAction;
+import commandes.DefaireAction;
 import modele.Image;
 import modele.Modele;
 
 /**
  *
  */
-public class FenetrePrincipale extends JFrame {
+public class FenetrePrincipale extends MappedActionsJFrame {
 
 	private static final long serialVersionUID = 1L;
 	private static final String TITRE_FENETRE = "Laboratoire 3 : LOG121";
@@ -48,7 +52,7 @@ public class FenetrePrincipale extends JFrame {
 		menuFenetre.add(nouvelleFenetre);
 		
 		
-		// Faire en sorte que le X de la fenetre ferme la fenetre
+		//Faire en sorte que le X de la fenetre ferme la fenetre
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle(TITRE_FENETRE);
 		setSize(DIMENSION);
@@ -57,6 +61,8 @@ public class FenetrePrincipale extends JFrame {
 		// Empecher la redimension de la fenetre
 		setResizable(false);
 	}
+	
+	
 	
 	/**
 	 * Initialisation des vues initiales. 

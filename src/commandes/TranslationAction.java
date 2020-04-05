@@ -18,6 +18,11 @@ public class TranslationAction extends PerspectiveAbstractAction implements Mous
 	private int xFin = 0;
 	private int yFin = 0;
 	
+	//Ces variables sont utilisées pour déterminer si la translation
+	//effectué est un mouvement complet où si c'est seulement un translation spontanée
+	private int xClicked = 0;
+	private int yClicked = 0;
+	
 	public TranslationAction(Perspective perspective) {
 		super(perspective);
 	}
@@ -31,7 +36,7 @@ public class TranslationAction extends PerspectiveAbstractAction implements Mous
 		yFin = e.getPoint().y;
 		int deplacementX = xFin - xDepart;
 		int deplacementY = yFin - yDepart;
-		gc.faireCommande(new TranslationCommande(this.getPerspective(), new Point(deplacementX, deplacementY)));
+		gc.faireCommande(new TranslationCommande(this.getPerspective(), new Point(deplacementX, deplacementY), false));
 		xDepart = e.getPoint().x;
 		yDepart = e.getPoint().y;
 	}
@@ -50,11 +55,20 @@ public class TranslationAction extends PerspectiveAbstractAction implements Mous
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		xDepart = e.getPoint().x;
-		yDepart = e.getPoint().y;
+		xClicked = e.getPoint().x;
+		yClicked = e.getPoint().y;
+		xDepart = xClicked;
+		yDepart = yClicked;
+
 	}
 
+	/**
+	 * Mouse released est toujours appelé après mouseDragged. 
+	 */
 	@Override
-	public void mouseReleased(MouseEvent e) {}
-
+	public void mouseReleased(MouseEvent e) {
+		int deplacementX = xFin - xClicked;
+		int deplacementY = yFin - yClicked;
+		gc.faireCommande(new TranslationCommande(this.getPerspective(), new Point(deplacementX, deplacementY), true));
+	}
 }

@@ -10,11 +10,13 @@ import modele.Perspective;
 public class TranslationCommande implements Command{
 	private Point translation;
 	private Perspective perspective;
+	private boolean translationComplete;
 	
-	public TranslationCommande(Perspective perspective, Point translation) {
+	public TranslationCommande(Perspective perspective, Point translation, boolean translationComplete) {
 		super();
 		this.perspective = perspective;
 		this.translation = translation;
+		this.translationComplete = translationComplete;
 	}
 	
 	public Point getTranslation() {
@@ -27,16 +29,19 @@ public class TranslationCommande implements Command{
 
 	@Override
 	public boolean faire() {
-		int newX = perspective.getX() + translation.x;
-		int newY =  perspective.getY() + translation.y;
-		perspective.setEmplacement(new Point(newX, newY));
-		return false;
+		if(!this.translationComplete) {
+			int newX = perspective.getX() + translation.x;
+			int newY =  perspective.getY() + translation.y;
+			perspective.setEmplacement(new Point(newX, newY));
+		}
+		return translationComplete;
 	}
 
 	@Override
 	public void defaire() {
-		// TODO Auto-generated method stub
-		
+		int newX = perspective.getX() - translation.x;
+		int newY =  perspective.getY() - translation.y;
+		perspective.setEmplacement(new Point(newX, newY));
 	}
 
 	@Override

@@ -11,6 +11,8 @@ public class ZoomCommande implements Command{
 	
 	private Perspective perspective;
 	private double toursSouris;
+	private double multiplicateur = 1; //Facteur d'agrandissement/rapetissement par
+	//défaut (rien n'est changé)
 	
 	public ZoomCommande(Perspective perspective, double toursSouris) {
 		super();
@@ -20,22 +22,20 @@ public class ZoomCommande implements Command{
 
 	@Override
 	public boolean faire() {
-		double multiplicateur = 1.0;
 		if(toursSouris > 0) {
 			multiplicateur = MULTI_AGRANDISSEMENT;
 		} else if(toursSouris < 0) {
 			multiplicateur = MULTI_RAPETISSEMENT;
 		}
 		double facteur = perspective.getFacteurZoom();
-		System.out.println(facteur);
 		this.perspective.setFacteurZoom(facteur * multiplicateur);
-		return false;
+		return true;
 	}
 
 	@Override
 	public void defaire() {
-		// TODO Auto-generated method stub
-		
+		double facteur = perspective.getFacteurZoom();
+		this.perspective.setFacteurZoom(facteur / multiplicateur);
 	}
 
 	@Override
