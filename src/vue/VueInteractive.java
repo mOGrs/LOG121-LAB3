@@ -120,15 +120,22 @@ public class VueInteractive extends Vue {
 		menuFenetre.add(new JLabel(DESCRIPTION));
 		
 		//Ajout des boutons pour le copier-coller
-		JButton echelle = new JButton(BTN_CP_ECHELLE);
+		JToggleButton echelle = new JToggleButton(BTN_CP_ECHELLE);
 		echelle.addActionListener(new ChangerStrategieCopierAction(this, new StrategieEchelle()));
-		JButton translation = new JButton(BTN_CP_TRANSLATION);
+		JToggleButton translation = new JToggleButton(BTN_CP_TRANSLATION);
 		translation.addActionListener(new ChangerStrategieCopierAction(this, new StrategieTranslation()));
-		JButton lesDeux = new JButton(BTN_CP_LES_DEUX);
+		JToggleButton lesDeux = new JToggleButton(BTN_CP_LES_DEUX);
 		lesDeux.addActionListener(new ChangerStrategieCopierAction(this, new StrategieEchelleEtTranslation()));
-		JButton rien = new JButton(BTN_CP_RIEN);
+		JToggleButton rien = new JToggleButton(BTN_CP_RIEN);
+		rien.setSelected(true);
 		rien.addActionListener(new ChangerStrategieCopierAction(this, new StrategieRien()));
 		
+		ButtonGroup group = new ButtonGroup();
+		group.add(echelle);
+		group.add(translation);
+		group.add(lesDeux);
+		group.add(rien);
+
 		menuFenetre.add(echelle);
 		menuFenetre.add(translation);
 		menuFenetre.add(lesDeux);

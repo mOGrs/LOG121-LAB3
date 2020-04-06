@@ -94,4 +94,9 @@ public class Perspective extends Observable implements java.io.Serializable, Ori
     	this.setEmplacement(((PerspectiveMemento)memento).getEmplacement());
     	this.setFacteurZoom(((PerspectiveMemento)memento).getFacteurZoom());
 	}
+
+	@Override
+	public String toString() {
+		return "Perspective [emplacement=" + emplacement + ", facteurZoom=" + facteurZoom + "]";
+	}
 }
