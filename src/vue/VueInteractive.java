@@ -23,11 +23,17 @@ import modele.Modele;
 import modele.Perspective;
 import javax.swing.*;
 
-import commandes.ChargerImageAction;
+import commandes.CopierAction;
 import commandes.DeserialisationPerspectiveAction;
 import commandes.SerialiserPerspectiveAction;
 import commandes.TranslationAction;
 import commandes.ZoomAction;
+import copierColler.ChangerStrategieCopierAction;
+import copierColler.StrategieCopie;
+import copierColler.StrategieEchelle;
+import copierColler.StrategieEchelleEtTranslation;
+import copierColler.StrategieRien;
+import copierColler.StrategieTranslation;
 
 import java.awt.BorderLayout;
 import java.awt.Graphics;
@@ -45,6 +51,7 @@ public class VueInteractive extends Vue {
 	private final static String BTN_CP_TRANSLATION = "Translation";
 	private final static String BTN_CP_LES_DEUX= "Les deux";
 	private final static String BTN_CP_RIEN = "Rien";
+	private StrategieCopie strategie;
 	
 	public VueInteractive(Modele modele, Image image, Perspective perspective) {
 		super(modele, image, perspective);
@@ -96,9 +103,13 @@ public class VueInteractive extends Vue {
 		
 		//Ajout des boutons pour le copier-coller
 		JButton echelle = new JButton(BTN_CP_ECHELLE);
+		echelle.addActionListener(new ChangerStrategieCopierAction(this, new StrategieEchelle()));
 		JButton translation = new JButton(BTN_CP_TRANSLATION);
+		translation.addActionListener(new ChangerStrategieCopierAction(this, new StrategieTranslation()));
 		JButton lesDeux = new JButton(BTN_CP_LES_DEUX);
+		lesDeux.addActionListener(new ChangerStrategieCopierAction(this, new StrategieEchelleEtTranslation()));
 		JButton rien = new JButton(BTN_CP_RIEN);
+		rien.addActionListener(new ChangerStrategieCopierAction(this, new StrategieRien()));
 		
 		menuFenetre.add(echelle);
 		menuFenetre.add(translation);
@@ -114,6 +125,14 @@ public class VueInteractive extends Vue {
 		return itemSerialiser;
 	}
 	
+	public StrategieCopie getStrategie() {
+		return strategie;
+	}
+
+	public void setStrategie(StrategieCopie strategie) {
+		this.strategie = strategie;
+	}
+
 	/**
 	 * Permet de dessiner l'Image en y appliquant les modifications de la perspective.
 	 */
