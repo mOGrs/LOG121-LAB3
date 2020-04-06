@@ -34,6 +34,6 @@ public class MappedActionsJFrame extends JFrame{
 		im.put(CtrlZ, DEFAIRE);	
 		
 		KeyStroke CtrlY = KeyStroke.getKeyStroke("control Y");
-		im.put(CtrlY, REFAIRE);	
+		im.put(CtrlY, REFAIRE);
 	}
 }

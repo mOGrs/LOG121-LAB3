@@ -23,8 +23,10 @@ import modele.Modele;
 import modele.Perspective;
 import javax.swing.*;
 
+import commandes.CollerAction;
 import commandes.CopierAction;
 import commandes.DeserialisationPerspectiveAction;
+import commandes.RefaireAction;
 import commandes.SerialiserPerspectiveAction;
 import commandes.TranslationAction;
 import commandes.ZoomAction;
@@ -51,6 +53,8 @@ public class VueInteractive extends Vue {
 	private final static String BTN_CP_TRANSLATION = "Translation";
 	private final static String BTN_CP_LES_DEUX= "Les deux";
 	private final static String BTN_CP_RIEN = "Rien";
+	private final static String COPIER = "Copier";
+	private final static String COLLER = "Coller";
 	private StrategieCopie strategie;
 	
 	public VueInteractive(Modele modele, Image image, Perspective perspective) {
@@ -75,6 +79,20 @@ public class VueInteractive extends Vue {
 		pp.addMouseMotionListener(translationlst);
 		pp.addMouseWheelListener(zoomlst);
 		add(pp);
+		
+		//Ajout des options de copier et coller
+		pp.getActionMap().put(COPIER, new CopierAction(this));
+		pp.getActionMap().put(COLLER, new CollerAction(this));
+		
+		InputMap im = pp.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+		
+		//La stratégie de copie par défaut est de ne rien faire
+		this.setStrategie(new StrategieRien());
+		KeyStroke CtrlC = KeyStroke.getKeyStroke("control C");
+		im.put(CtrlC, COPIER);
+		
+		KeyStroke CtrlV = KeyStroke.getKeyStroke("control V");
+		im.put(CtrlV, COLLER);
 		
 		//Création du menu
 		this.creerMenu();
