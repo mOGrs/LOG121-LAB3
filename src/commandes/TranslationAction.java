@@ -66,9 +66,7 @@ public class TranslationAction extends PerspectiveAbstractAction implements Mous
 	public void mouseMoved(MouseEvent e) {}
 
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		System.out.println("Click");
-	}
+	public void mouseClicked(MouseEvent e) {}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {}
@@ -78,7 +76,6 @@ public class TranslationAction extends PerspectiveAbstractAction implements Mous
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		System.out.println("pressed");
 		//On prend en note les coordonnées initales de l'image au début du mouvement. 
 		xClicked = e.getPoint().x;
 		yClicked = e.getPoint().y;
