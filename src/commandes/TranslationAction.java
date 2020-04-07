@@ -66,7 +66,9 @@ public class TranslationAction extends PerspectiveAbstractAction implements Mous
 	public void mouseMoved(MouseEvent e) {}
 
 	@Override
-	public void mouseClicked(MouseEvent e) {}
+	public void mouseClicked(MouseEvent e) {
+		System.out.println("Click");
+	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {}
@@ -76,6 +78,7 @@ public class TranslationAction extends PerspectiveAbstractAction implements Mous
 
 	@Override
 	public void mousePressed(MouseEvent e) {
+		System.out.println("pressed");
 		//On prend en note les coordonnées initales de l'image au début du mouvement. 
 		xClicked = e.getPoint().x;
 		yClicked = e.getPoint().y;
@@ -91,8 +94,10 @@ public class TranslationAction extends PerspectiveAbstractAction implements Mous
 	public void mouseReleased(MouseEvent e) {
 		//Lorsque la souris est relâchée, c'est à ce moment que l'objet 
 		//TranslationCommande qui pourra être défait et refait est créé. 
-		int deplacementX = xFin - xClicked;
-		int deplacementY = yFin - yClicked;
-		gc.faireCommande(new TranslationCommande(this.getPerspective(), new Point(deplacementX, deplacementY), true));
+		int deplacementX = e.getPoint().x - xClicked;
+		int deplacementY = e.getPoint().y - yClicked;
+		if(deplacementX != 0 && deplacementY != 0) {
+			gc.faireCommande(new TranslationCommande(this.getPerspective(), new Point(deplacementX, deplacementY), true));
+		}
 	}
 }
