@@ -1,20 +1,32 @@
+/******************************************************
+Cours:   LOG121
+Session: H2020
+Groupe:  02
+Projet: Laboratoire #3
+Étudiant(e)s: Marc-Olivier Gagner, Mathieu Béland, Omar Elkhiraoui
+              
+              
+Professeur :  Vincent Lacasse
+Nom du fichier: Vue.java
+Date créé: 2019-04-06
+Date créé: 2019-04-06
+*******************************************************
+Historique des modifications
+*******************************************************
+2019-04-06 Version initiale
+*******************************************************/
+
 package vue;
 
-import java.awt.BorderLayout;
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.imageio.ImageIO;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.KeyStroke;
 
-import commandes.DefaireAction;
 import modele.Image;
 import modele.Modele;
 import modele.Perspective;

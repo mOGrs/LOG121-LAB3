@@ -1,3 +1,21 @@
+/******************************************************
+Cours:   LOG121
+Session: H2020
+Groupe:  02
+Projet: Laboratoire #3
+Étudiant(e)s: Marc-Olivier Gagner, Mathieu Béland, Omar Elkhiraoui
+              
+              
+Professeur :  Vincent Lacasse
+Nom du fichier: ZoomAction.java
+Date créé: 2019-04-06
+Date créé: 2019-04-06
+*******************************************************
+Historique des modifications
+*******************************************************
+2019-04-06 Version initiale
+*******************************************************/
+
 package commandes;
 
 import java.awt.Point;
@@ -10,8 +28,8 @@ import java.awt.event.MouseWheelListener;
 import modele.Perspective;
 
 /**
- * Permet de créer des instances de ZoomCommande (qui vont ensuite changer le zoom sur les images) à 
- * partir du roulement de la roue d'une sourie. 
+ * Permet de créer des instances de ZoomCommande (qui vont ensuite changer l'échelle
+ *  sur les images) à partir du roulement de la roue d'une sourie. 
  */
 public class ZoomAction extends PerspectiveAbstractAction implements MouseWheelListener{
 	

@@ -1,3 +1,21 @@
+/******************************************************
+Cours:   LOG121
+Session: H2020
+Groupe:  02
+Projet: Laboratoire #3
+Étudiant(e)s: Marc-Olivier Gagner, Mathieu Béland, Omar Elkhiraoui
+              
+              
+Professeur :  Vincent Lacasse
+Nom du fichier: ChargerImageAction.java
+Date créé: 2019-04-06
+Date créé: 2019-04-06
+*******************************************************
+Historique des modifications
+*******************************************************
+2019-04-06 Version initiale
+*******************************************************/
+
 package commandes;
 
 import java.awt.event.ActionEvent;
@@ -23,9 +41,9 @@ public class ChargerImageAction extends PouvantEtreAppliqueAPlusieursVuesAction 
 	private static final String DESCRIPTION = ".png, .jpeg ou .jpg";
 	
 	/**
-	 * PAS de constructeur avec des vues individuelles voir la class
+	 * PaS de constructeur avec des vues individuelles voir la class
 	 * PouvantEtreAppliqueAPlusieursVuesAction
-	 * @param vues: toutes les vues étant modifiées lorsques le change
+	 * @param vues: toutes les vues étant modifiées lorsque l'on change
 	 * l'image. 
 	 */
 	public ChargerImageAction(ArrayList<Vue> vues) {

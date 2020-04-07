@@ -1,3 +1,21 @@
+/******************************************************
+Cours:   LOG121
+Session: H2020
+Groupe:  02
+Projet: Laboratoire #3
+Étudiant(e)s: Marc-Olivier Gagner, Mathieu Béland, Omar Elkhiraoui
+              
+              
+Professeur :  Vincent Lacasse
+Nom du fichier: ZoomCommande.java
+Date créé: 2019-04-06
+Date créé: 2019-04-06
+*******************************************************
+Historique des modifications
+*******************************************************
+2019-04-06 Version initiale
+*******************************************************/
+
 package commandes;
 
 import modele.Memento;
@@ -5,7 +23,7 @@ import modele.Perspective;
 import modele.PerspectiveMemento;
 
 /**
- * Commande permettant de changer le focus d'une image
+ * Commande permettant de changer le facteur d'échelle d'une image. 
  */
 public class ZoomCommande implements Command{
 	private final static double MULTI_AGRANDISSEMENT = 1.1;
@@ -25,9 +43,9 @@ public class ZoomCommande implements Command{
 
 	@Override
 	public boolean faire() {
-		if(toursSouris < 0) {
+		if(toursSouris < 0) {//Si l'on roule la sourie vers l'avant, on agrandit
 			multiplicateur = MULTI_AGRANDISSEMENT;
-		} else if(toursSouris > 0) {
+		} else if(toursSouris > 0) {//Si l'on roule la sourie vers l'arrière, on rapetisse
 			multiplicateur = MULTI_RAPETISSEMENT;
 		}
 		double facteur = perspective.getFacteurZoom();

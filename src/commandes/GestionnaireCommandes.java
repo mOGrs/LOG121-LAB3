@@ -21,11 +21,9 @@ package commandes;
 import java.util.LinkedList;
 
 /**
- * Gestionnaire de commandes impl.menter en suivant un Patron Singleton et qui devrait en principe 
- * être le seul à exécuter les commandes. 
+ * Gestionnaire de commandes impl.menter en suivant un Patron Singleton et qui
+ *  devrait en principe être le seul à exécuter toutes les commandes. 
  */
-
-//SE RÉFÉRER AUX EXEMPLES DONNÉES PAR LE PROF POUR COMPRENDRE LA LOGIQUE
 public class GestionnaireCommandes {
 	private static GestionnaireCommandes SINGLETON = null;
 	private LinkedList<Command> historique = new LinkedList<Command>();
@@ -55,6 +53,9 @@ public class GestionnaireCommandes {
         }
 	}
 	
+	/**
+	 * Permet de féfaire les commandes effectuées
+	 */
     private void defaire() {
         if (historique.size() > 0) {
         	Command cmd = historique.removeLast();
@@ -63,6 +64,10 @@ public class GestionnaireCommandes {
         }
     }
     
+	/**
+	 * Permet de refaire les commandes défaites directement après les avoir défaites.
+	 * VOIR FAIRE COMMANDE
+	 */
     private void refaire() {
         if (listeRefaire.size() > 0) {
         	Command cmd = listeRefaire.removeLast();

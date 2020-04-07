@@ -1,3 +1,21 @@
+/******************************************************
+Cours:   LOG121
+Session: H2020
+Groupe:  02
+Projet: Laboratoire #3
+Étudiant(e)s: Marc-Olivier Gagner, Mathieu Béland, Omar Elkhiraoui
+              
+              
+Professeur :  Vincent Lacasse
+Nom du fichier: TranslationAction.java
+Date créé: 2019-04-06
+Date créé: 2019-04-06
+*******************************************************
+Historique des modifications
+*******************************************************
+2019-04-06 Version initiale
+*******************************************************/
+
 package commandes;
 
 import java.awt.Point;
@@ -32,6 +50,9 @@ public class TranslationAction extends PerspectiveAbstractAction implements Mous
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
+		//Lorsque l'image est manipulé, des objets TranslationCommande sont
+		//exécutés, mais seule l'instance finale se garder en mémoire pour être
+		//défaite/refaite. 
 		xFin = e.getPoint().x;
 		yFin = e.getPoint().y;
 		int deplacementX = xFin - xDepart;
@@ -55,6 +76,7 @@ public class TranslationAction extends PerspectiveAbstractAction implements Mous
 
 	@Override
 	public void mousePressed(MouseEvent e) {
+		//On prend en note les coordonnées initales de l'image au début du mouvement. 
 		xClicked = e.getPoint().x;
 		yClicked = e.getPoint().y;
 		xDepart = xClicked;
@@ -67,6 +89,8 @@ public class TranslationAction extends PerspectiveAbstractAction implements Mous
 	 */
 	@Override
 	public void mouseReleased(MouseEvent e) {
+		//Lorsque la souris est relâchée, c'est à ce moment que l'objet 
+		//TranslationCommande qui pourra être défait et refait est créé. 
 		int deplacementX = xFin - xClicked;
 		int deplacementY = yFin - yClicked;
 		gc.faireCommande(new TranslationCommande(this.getPerspective(), new Point(deplacementX, deplacementY), true));

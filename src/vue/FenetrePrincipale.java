@@ -1,3 +1,21 @@
+/******************************************************
+Cours:   LOG121
+Session: H2020
+Groupe:  02
+Projet: Laboratoire #3
+Étudiant(e)s: Marc-Olivier Gagner, Mathieu Béland, Omar Elkhiraoui
+              
+              
+Professeur :  Vincent Lacasse
+Nom du fichier: FenetrePrincipale.java
+Date créé: 2019-04-06
+Date créé: 2019-04-06
+*******************************************************
+Historique des modifications
+*******************************************************
+2019-04-06 Version initiale
+*******************************************************/
+
 package vue;
 
 import java.awt.BorderLayout;
@@ -13,6 +31,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 import commandes.ChargerImageAction;
@@ -22,7 +41,13 @@ import modele.Image;
 import modele.Modele;
 
 /**
- *
+ * Cette fenêtre est le point de départ du programme. C'est elle qui crée toutes les vues.
+ * Lors de l'exécution, elle peut également créer de nouvelles VuesInterractives, charger
+ * de nouvelles images pour toutes les vues en même temps ou encore charger une perspective
+ * qui sera appliquée à toutes les VuesInteractives. 
+ * 
+ * L'interface graphique de cette classe a pris comme base l'interface graphique du 
+ * LABORATOIRE 1. 
  */
 public class FenetrePrincipale extends MappedActionsJFrame {
 
@@ -32,12 +57,15 @@ public class FenetrePrincipale extends MappedActionsJFrame {
 	private static final String MENU_NOUVELLE_FENETRE= "Nouvelle fenetre";
 	private static final ArrayList<Vue> vues = new ArrayList<Vue>();
 	private static final String MENU_FICHIER_CHARGER_IMAGE = "Charger image";
-
+	private static final String MENU_AIDE_TITRE = "Aide et instructions";
+	private static final String MENU_AIDE_PRINCIPALE = "Fonctionnement de la fenêtre principale";
+	private static final String MENU_AIDE_VUES = "Fonctionnement des fenêtres interactives.";
+	
 	private Modele modele;
 
 	public FenetrePrincipale() {
 		modele = new Modele();
-		//On initialise les vues tel que demand�
+		//On initialise les vues tel que demandé
 		initVues();
 		
 		//Mise en place du menu 
@@ -54,14 +82,78 @@ public class FenetrePrincipale extends MappedActionsJFrame {
 	}
 	
 	/**
-	 * Instancie le menu de la fen�ter principale
+	 * Cr�er le menu Aide
+	 */
+	private JMenu creerMenuAide() {
+		JMenu menuAide = new JMenu(MENU_AIDE_TITRE);
+		JMenuItem menuProposPrincipale = new JMenuItem(MENU_AIDE_PRINCIPALE);
+		menuAide.add(menuProposPrincipale);
+
+		menuProposPrincipale.addActionListener((ActionEvent e) -> {
+			JOptionPane.showMessageDialog(null,
+					"<html><p>Options de la fenetre principale:</p>" + "<br>"
+							+ "<p>-Charger une Image: Permet de charger une image</p>"
+							+ "<p> lors de l'exécution. Cette image sera appliquées à </p>"
+							+ "<p> toutes les vues.</p>"
+							+ "<p></p>"
+							+ "<p>-Charger une perspective: Permet de charger un fichier .ser</p>"
+							+ "<p> contenant une perspective sérialisée. Cette perspective sera</p>"
+							+ "<p> appliqué à toutes les vues.</p>"
+							+ "<p></p>"
+							+ "<p>-Créer fenêtre: Permet de créer une nouvelle fenêres de type</p>" 
+							+ "<p> VueInteractive qui sera liée à la fenêtre principale</p>"
+							+ "<p></p>"
+							+ "<p>-Ctrl+Z: Permet de défaire la dernière commande effecutée sur une des vues.</p>"
+							+ "<p></p>"
+							+ "<p>-Ctrl+Y: Permet de refaire la dernière commande défaite sur une des vues.</p>"
+							+ "<p></p></html>");
+		});
+		add(menuAide);
+		JMenuItem menuProposVues = new JMenuItem(MENU_AIDE_VUES);
+		menuAide.add(menuProposVues);
+
+		menuProposVues.addActionListener((ActionEvent e) -> {
+			JOptionPane.showMessageDialog(null,
+					"<html><p>Options de la fenetre principale:</p>" + "<br>"
+							+ "<p>-Charger une Image: Permet de charger une image</p>"
+							+ "<p> lors de l'exécution. Cette image sera appliquées à </p>"
+							+ "<p> cette vue seulement.</p>"
+							+ "<p></p>"
+							+ "<p>-Charger une perspective: Permet de charger un fichier .ser</p>"
+							+ "<p> contenant une perspective sérialisée. Cette perspective sera</p>"
+							+ "<p> appliqué à cette vue seulement.</p>"
+							+ "<p></p>"
+							+ "<p>-Translation: Pour effectuer une translation, cliquer</p>"
+							+ "<p> sur la zone de dessin pour et garder la sourie enfoncer</p>"
+							+ "<p> pour bouger l'image</p>"
+							+ "<p></p>"
+							+ "<p>-Zoom: Pour changer l'image de l'échelle utiliser</p>"
+							+ "<p> la roulette de la sourie.</p>"
+							+ "<p></p>"
+							+ "<p>-Éléments à copier: Les boutons permettent de choisir quoi</p>" 
+							+ "<p> copier et coller.</p>"
+							+ "<p></p>"
+							+ "<p>-Ctrl+C: Permettent de copier des éléments de la perspective</p>"
+							+ "<p> de l'image de la vue. (Lorsqu'effectué sur la zone de dessin.</p>"
+							+ "<p></p>"
+							+ "<p>-Ctrl+V: Permettent de coller des éléments de la perspective</p>"
+							+ "<p> suur l'image d'une vue. (Lorsqu'effectué sur la zone de dessin).</p>"
+							+ "<br>"
+							+ "<p></p></html>");
+		});
+		add(menuAide);
+		return menuAide;
+	}
+	
+	/**
+	 * Instancie le menu de la fenêter principale
 	 */
 	public void creerMenu() {
 		//Ajout du menu
 		JMenuBar menuFenetre = new JMenuBar();
 		add(menuFenetre, BorderLayout.NORTH);
 		
-		//Ajout du menu contenant les options d�roulantes
+		//Ajout du menu contenant les options déroulantes
 		JMenu menuFichier = MenuItemsGenerator.creerMenuFichier();
 		
 		//Ajout de l'option de charger une perpective POUR TOUTES LES VUES
@@ -70,19 +162,21 @@ public class FenetrePrincipale extends MappedActionsJFrame {
 		//Ajout de l'option de charger une image POUR TOUTES LES VUES
 		menuFichier.add(MenuItemsGenerator.creerItemMenuChargerImage(vues));
 		
-		//Ajout de l'option permettant d'ouvrier de nouvelles fen�tres 
+		//Ajout de l'option permettant d'ouvrier de nouvelles fenêtres 
 		menuFichier.add(creerMenuItemNouvelleFenetre());
 
 		//Ajout de l'option de quitter
 		menuFichier.addSeparator();
 		menuFichier.add(MenuItemsGenerator.creerMenuItemQuitter());
 		
-		//Ajouter le menu contenant les options d�roulantes au menu de la fen�tre
+		//Ajouter le menu contenant les options déroulantes au menu de la fenêtre
 		menuFenetre.add(menuFichier);
+		
+		menuFenetre.add(creerMenuAide());
 	}
 	
 	/**
-	 * Cr�er un item de menu permettant de cr��er une nouvelle VueInteractive
+	 * Créer un item de menu permettant de crééer une nouvelle VueInteractive
 	 * @return
 	 */
 	private JMenuItem creerMenuItemNouvelleFenetre() {
@@ -118,13 +212,13 @@ public class FenetrePrincipale extends MappedActionsJFrame {
 	}
 	
 	/**
-	 * Permet de cr�er des vues suppl�mentaires � celles cr��es initialement. 
+	 * Permet de créer des vues supplémentaires à celles créées initialement. 
 	 * @return nouvelle VueInteractive
 	 */
 	private VueInteractive createVueInteractive() {
 		VueInteractive vue = new VueInteractive(modele, new Image());
 		vue.setVisible(true);
-		//Les nouvelles vues sont plac�es au milieu de l'�cran. 
+		//Les nouvelles vues sont placées au milieu de l'écran. 
 		vue.setLocationRelativeTo(null);
 		return vue;
 	}

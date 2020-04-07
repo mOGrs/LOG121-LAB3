@@ -1,3 +1,21 @@
+/******************************************************
+Cours:   LOG121
+Session: H2020
+Groupe:  02
+Projet: Laboratoire #3
+Étudiant(e)s: Marc-Olivier Gagner, Mathieu Béland, Omar Elkhiraoui
+              
+              
+Professeur :  Vincent Lacasse
+Nom du fichier: Simulation.java
+Date créé: 2019-04-06
+Date créé: 2019-04-06
+*******************************************************
+Historique des modifications
+*******************************************************
+2019-04-06 Version initiale
+*******************************************************/
+
 package commandes;
 
 import java.awt.event.ActionEvent;
@@ -11,10 +29,17 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import vue.Vue;
 
+/**
+ * Permet de sérialiser la perspective d'une vue en ouvrant un explorateur 
+ * de fichier permettant de sélectionner le fichier et l'endroit dans lequel 
+ * effectuer l'opération. La résialisation est effectuée par un objet
+ * SerialiserPerspectiveCommande. 
+ */
 public class SerialiserPerspectiveAction extends GeneralAction {
 	private static final String LAST_USED_FOLDER = ""; //Permet de garder en mémoire l'emplacement 
 	//de la dernière image sélectionnée
-	private static final String EXTENSION = ".ser";
+	private static final String EXTENSION = ".ser"; //Par convention, 
+	//les Perspectives sérialisées le seront dans des fichiers .ser
 	private Vue vue;
 	
 	public SerialiserPerspectiveAction(Vue vue) {

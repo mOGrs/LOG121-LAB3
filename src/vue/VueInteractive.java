@@ -1,20 +1,20 @@
 /******************************************************
- Cours:   LOG121
- Session: H2020
- Groupe:  02
- Projet: Laboratoire #3
- Ã‰tudiant(e)s: Marc-Olivier Gagner
-
-
- Professeur :  Vincent Lacasse
- Nom du fichier: VueMiniature.java
- Date crÃ©Ã©: 2019-03-10
- Date dern. modif. 2019-03-10
- *******************************************************
- Historique des modifications
- *******************************************************
- 2019-03-02 Version initiale
- *******************************************************/
+Cours:   LOG121
+Session: H2020
+Groupe:  02
+Projet: Laboratoire #3
+Étudiant(e)s: Marc-Olivier Gagner, Mathieu Béland, Omar Elkhiraoui
+              
+              
+Professeur :  Vincent Lacasse
+Nom du fichier: VueInteractive.java
+Date créé: 2019-04-06
+Date créé: 2019-04-06
+*******************************************************
+Historique des modifications
+*******************************************************
+2019-04-06 Version initiale
+*******************************************************/
 
 package vue;
 
@@ -25,8 +25,6 @@ import javax.swing.*;
 
 import commandes.CollerAction;
 import commandes.CopierAction;
-import commandes.DeserialisationPerspectiveAction;
-import commandes.RefaireAction;
 import commandes.SerialiserPerspectiveAction;
 import commandes.TranslationAction;
 import commandes.ZoomAction;
@@ -39,10 +37,11 @@ import copierColler.StrategieTranslation;
 
 import java.awt.BorderLayout;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
 
 /**
- * Classe représentatnt les vues interratives que l'on peut manipuler. 
+ * Classe représentatnt les vues interratives que l'on peut manipuler. Sans nul doute
+ * la classe la plus importante du programme. Elle permet de charger une image, sauvegarder
+ * et charger une perspective, manipuler une image. 
  */
 public class VueInteractive extends Vue {
 	private static final String ITEM_SERIALISER= "Sauvegarder la perspective";
@@ -114,6 +113,7 @@ public class VueInteractive extends Vue {
 		
 		//Ajouter l'option de quitter au menu, séparer d'un séparateur
 		menuFichier.addSeparator();
+
 		menuFichier.add(MenuItemsGenerator.creerMenuItemQuitter());
 		
 		menuFenetre.add(menuFichier);

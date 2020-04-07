@@ -1,20 +1,20 @@
 /******************************************************
- Cours:   LOG121
- Session: H2020
- Groupe:  02
- Projet: Laboratoire #3
- Ã‰tudiant(e)s: Marc-Olivier Gagner
-
-
- Professeur :  Vincent Lacasse
- Nom du fichier: Image.java
- Date crÃ©Ã©: 2019-03-10
- Date dern. modif. 2019-03-10
- *******************************************************
- Historique des modifications
- *******************************************************
- 2019-03-02 Version initiale
- *******************************************************/
+Cours:   LOG121
+Session: H2020
+Groupe:  02
+Projet: Laboratoire #3
+Étudiant(e)s: Marc-Olivier Gagner, Mathieu Béland, Omar Elkhiraoui
+              
+              
+Professeur :  Vincent Lacasse
+Nom du fichier: Image.java
+Date créé: 2019-04-06
+Date créé: 2019-04-06
+*******************************************************
+Historique des modifications
+*******************************************************
+2019-04-06 Version initiale
+*******************************************************/
 
 package modele;
 
@@ -22,6 +22,10 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.Observable;
 
+/**
+ * Élément du modèle qui contient une image. C'est de la que les vues 
+ * vont chercher les images à représenter. 
+ */
 public class Image extends Observable implements Originator{
     private String imagePath = null;
     
